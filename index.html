@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>COL‑SAN · Consultorio Dental</title>
-<meta name="description" content="Consultorio Dental COL-SAN: tratamientos, promociones, horarios y reserva de citas en línea.">
+<title>COL‑SAN · Consultorio Dental en Oruro, Bolivia</title>
+<meta name="description" content="Consultorio Dental COL-SAN en Oruro, Bolivia: tratamientos, promociones, horarios y reserva de citas en línea.">
 <meta name="theme-color" content="#0288d1">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="css/estilos.css">
+<script type="application/ld+json" id="ld">{}</script>
 </head>
 <body>
 
@@ -32,7 +33,7 @@
 
 <div class="sheet-menu" id="menu">
   <div class="head">
-    <span class="brand"><img src="assets/logo-circulo.webp" alt="" data-img="logo" width="48" height="48"><span class="brand-txt"><span class="brand-name" data-i="nombre">COL‑SAN</span><span class="brand-sub">Consultorio dental</span></span></span>
+    <span class="brand"><img src="assets/logo-circulo.webp" alt="" data-img="logo" width="48" height="48"><span class="brand-txt"><span class="brand-name nb-name">COL‑SAN</span><span class="brand-sub">Consultorio dental</span></span></span>
     <button class="icon-btn" id="menuClose" aria-label="Cerrar menú"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <nav id="navM"></nav>
@@ -49,6 +50,7 @@
       <div>
         <p class="eyebrow" data-k="h_ey">Consultorio dental</p>
         <h1 class="brandname" data-i="nombre">COL‑SAN</h1>
+        <p class="city"><i class="fa-solid fa-location-dot"></i><span data-i="ciudad" data-ph="Ciudad"></span></p>
         <p class="typed"><span id="typed"></span><i class="caret"></i></p>
         <div class="estado" id="estado"><i class="dot"></i><span class="ic"><i class="fa-solid fa-clock"></i></span><span><b data-st>…</b><small data-sub>…</small></span></div>
         <div class="btns">
@@ -69,7 +71,7 @@
       <div class="stat reveal"><i class="fa-solid fa-face-smile"></i><b data-k="s1" data-count>+4800</b><span data-k="s1l">pacientes felices</span></div>
       <div class="stat reveal" style="--d:90ms"><i class="fa-solid fa-award"></i><b data-k="s2" data-count>14</b><span data-k="s2l">años de experiencia</span></div>
       <div class="stat reveal" style="--d:180ms"><i class="fa-solid fa-star"></i><b data-k="s3">4.9 ★</b><span data-k="s3l">calificación</span></div>
-      <div class="stat reveal" style="--d:270ms"><i class="fa-solid fa-truck-medical"></i><b data-k="s4">24/7</b><span data-k="s4l">urgencias</span></div>
+      <div class="stat reveal" style="--d:270ms"><i class="fa-solid fa-location-dot"></i><b data-k="s4">Oruro</b><span data-k="s4l">Bolivia</span></div>
     </div>
   </div>
 
@@ -81,13 +83,16 @@
         <div class="rows" id="infoRows"></div>
         <div class="btns" style="margin-top:18px">
           <a class="btn sm" href="#ubicacion" data-go="ubicacion"><i class="fa-solid fa-location-dot"></i>Cómo llegar</a>
-          <a class="btn sm ghost" href="#especialistas" data-go="especialistas">Conoce al equipo</a>
+          <a class="btn sm ghost" href="#especialistas" data-go="especialistas" id="btnTeam">Conoce al equipo</a>
+          <a class="btn sm ghost" href="#horarios" data-go="horarios" id="btnHours">Ver horarios</a>
+          <button class="btn sm white edit-only" data-open="ubic"><i class="fa-solid fa-map-pin"></i>Cambiar ubicación</button>
         </div>
       </div>
       <div class="card reveal" style="--d:120ms">
         <span class="kicker"><i class="fa-solid fa-clock"></i><span data-k="hs_k">Te esperamos</span></span>
         <h3 data-k="hs_t">Horario de atención</h3>
-        <div class="sched" id="schedHome"></div>
+        <div class="sched" id="schedHome" data-open="sc"></div>
+        <button class="btn sm edit-only" data-open="sc" style="margin-top:14px"><i class="fa-solid fa-pen"></i>Editar horarios</button>
       </div>
     </div>
   </div>
@@ -104,7 +109,8 @@
     <div class="card reveal" style="text-align:center;padding:36px 22px">
       <span class="kicker"><i class="fa-solid fa-heart"></i><span data-k="sg_k">Síguenos</span></span>
       <h3 data-k="sg_t">Mira nuestro día a día en redes</h3>
-      <div class="social" data-social style="justify-content:center;margin-top:16px"></div>
+      <div class="social" data-social data-open="redes" style="justify-content:center;margin-top:16px"></div>
+      <button class="btn sm edit-only" data-open="redes" style="margin-top:16px"><i class="fa-solid fa-link"></i>Poner links de redes</button>
     </div>
   </div>
 </section>
@@ -113,7 +119,7 @@
 <section class="mod" id="m-tratamientos">
   <header class="banner" data-bg="tratamientos"><div class="fx" data-fx></div><div class="wrap">
     <span class="kicker"><i class="fa-solid fa-tooth"></i><span data-k="tr_k">Catálogo</span></span>
-    <h2 data-k="tr_t">Tratamientos</h2>
+    <h2 data-k="nav_tratamientos">Tratamientos</h2>
     <p data-k="tr_p">Todo lo que tu sonrisa necesita, en un solo lugar. Precios referenciales en bolivianos.</p>
   </div></header>
   <div class="wrap">
@@ -121,7 +127,9 @@
       <div class="chips" id="cats"></div>
       <label class="search"><span class="sr">Buscar tratamiento</span><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar tratamiento…"></label>
     </div>
+    <p class="note edit-only" style="margin-bottom:18px"><i class="fa-solid fa-hand-pointer"></i> Toca el nombre, la categoría, la duración o el <b>precio</b> de cada tarjeta para cambiarlo.</p>
     <div class="grid" id="trats"></div>
+    <button class="btn edit-only add-btn" data-padd="tr"><i class="fa-solid fa-plus"></i>Agregar tratamiento</button>
   </div>
 </section>
 
@@ -129,41 +137,49 @@
 <section class="mod" id="m-promociones">
   <header class="banner" data-bg="promociones"><div class="fx" data-fx></div><div class="wrap">
     <span class="kicker"><i class="fa-solid fa-tags"></i><span data-k="pr_k">Por tiempo limitado</span></span>
-    <h2 data-k="pr_t">Promociones</h2>
+    <h2 data-k="nav_promociones">Promociones</h2>
     <p data-k="pr_p">Sonreír cuesta menos este mes. Elige tu promo y resérvala en un minuto.</p>
   </div></header>
-  <div class="wrap"><div class="grid" id="promos"></div></div>
+  <div class="wrap">
+    <p class="note edit-only" style="margin-bottom:18px"><i class="fa-solid fa-hand-pointer"></i> Toca cualquier texto o precio para cambiarlo. Precio promo en 0 = gratis.</p>
+    <div class="grid" id="promos"></div>
+    <button class="btn edit-only add-btn" data-padd="pr"><i class="fa-solid fa-plus"></i>Agregar promoción</button>
+  </div>
 </section>
 
 <!-- ============ ESPECIALISTAS ============ -->
 <section class="mod" id="m-especialistas">
   <header class="banner" data-bg="especialistas"><div class="fx" data-fx></div><div class="wrap">
     <span class="kicker"><i class="fa-solid fa-user-doctor"></i><span data-k="dr_k">Nuestro equipo</span></span>
-    <h2 data-k="dr_t">Especialistas</h2>
+    <h2 data-k="nav_especialistas">Especialistas</h2>
     <p data-k="dr_p">Manos expertas y trato humano en cada consulta.</p>
   </div></header>
-  <div class="wrap"><div class="grid" id="docs"></div></div>
+  <div class="wrap">
+    <div class="grid" id="docs"></div>
+    <button class="btn edit-only add-btn" data-padd="dr"><i class="fa-solid fa-plus"></i>Agregar especialista</button>
+  </div>
 </section>
 
 <!-- ============ HORARIOS ============ -->
 <section class="mod" id="m-horarios">
   <header class="banner" data-bg="horarios"><div class="fx" data-fx></div><div class="wrap">
     <span class="kicker"><i class="fa-solid fa-clock"></i><span data-k="ho_k">Atención</span></span>
-    <h2 data-k="ho_t">Horarios</h2>
+    <h2 data-k="nav_horarios">Horarios</h2>
     <p data-k="ho_p">Encuentra el momento ideal para tu visita.</p>
   </div></header>
   <div class="wrap">
     <div class="grid2">
       <div class="card reveal">
         <div class="estado" id="estado2" style="margin-bottom:20px"><i class="dot"></i><span class="ic"><i class="fa-solid fa-clock"></i></span><span><b data-st>…</b><small data-sub>…</small></span></div>
-        <div class="sched" id="sched"></div>
+        <div class="sched" id="sched" data-open="sc"></div>
+        <button class="btn edit-only" data-open="sc" style="margin-top:16px"><i class="fa-solid fa-pen"></i>Editar horarios</button>
       </div>
       <div style="display:grid;gap:20px">
-        <div class="card reveal" style="--fill:#fff;--d:120ms">
-          <span class="kicker" style="color:var(--bad2)"><i class="fa-solid fa-truck-medical"></i><span data-k="ur_k">Emergencias</span></span>
-          <h3 data-k="ur_t">Urgencias 24/7</h3>
-          <p data-k="ur_p">Dolor fuerte, diente roto o sangrado: escríbenos y te atendemos lo antes posible, también domingos y feriados.</p>
-          <button class="btn warn" data-wa="Hola, necesito atención de urgencia dental."><i class="fa-brands fa-whatsapp"></i>Escribir a la guardia</button>
+        <div class="card reveal" style="--d:120ms">
+          <span class="kicker" style="color:var(--bad2)"><i class="fa-solid fa-kit-medical"></i><span data-k="ur_k">¿Urgencia?</span></span>
+          <h3 data-k="ur_t">¿Te duele mucho?</h3>
+          <p data-k="ur_p">Si tienes dolor fuerte, un diente roto o sangrado, escríbenos por WhatsApp y te indicamos qué hacer.</p>
+          <button class="btn warn" data-wa="Hola, tengo una urgencia dental."><i class="fa-brands fa-whatsapp"></i><span data-k="ur_b">Escribir por WhatsApp</span></button>
         </div>
         <div class="card reveal" style="--d:200ms">
           <h3 data-k="ti_t">Mientras llegas</h3>
@@ -183,7 +199,7 @@
   <header class="banner" data-bg="ubicacion"><div class="fx" data-fx></div><div class="wrap">
     <span class="kicker"><i class="fa-solid fa-location-dot"></i><span data-k="ub_k">Visítanos</span></span>
     <h2 data-k="ub_t">Cómo llegar</h2>
-    <p data-k="ub_p">Estamos más cerca de lo que crees.</p>
+    <p data-k="ub_p">Estamos en el centro de Oruro, más cerca de lo que crees.</p>
   </div></header>
   <div class="wrap">
     <div class="grid2">
@@ -191,13 +207,18 @@
         <h3 data-k="ub_h">Dirección y contacto</h3>
         <div class="rows" id="locRows"></div>
         <div class="btns" style="margin-top:18px">
-          <a class="btn" id="dirBtn" target="_blank" rel="noopener"><i class="fa-solid fa-route"></i>Abrir en Google Maps</a>
+          <a class="btn" id="dirBtn" target="_blank" rel="noopener"><i class="fa-solid fa-route"></i>Cómo llegar</a>
+          <a class="btn ghost" id="viewBtn" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot"></i>Ver en Google Maps</a>
           <a class="btn ghost" id="telBtn"><i class="fa-solid fa-phone"></i>Llamar</a>
         </div>
         <h3 style="margin-top:26px" data-k="ub_s">Redes sociales</h3>
-        <div class="social" data-social></div>
+        <div class="social" data-social data-open="redes"></div>
+        <button class="btn sm edit-only" data-open="redes" style="margin-top:14px"><i class="fa-solid fa-link"></i>Poner links de redes</button>
       </div>
-      <div class="map reveal" style="--d:120ms"><iframe id="mapFrame" title="Mapa del consultorio" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div class="map reveal" style="--d:120ms">
+        <iframe id="mapFrame" title="Mapa del consultorio" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <button class="btn white edit-only map-edit" data-open="ubic"><i class="fa-solid fa-map-pin"></i>Cambiar ubicación del mapa</button>
+      </div>
     </div>
   </div>
 </section>
@@ -215,8 +236,9 @@
         <p class="step"><span>1</span>Tu consulta</p>
         <div class="form">
           <label class="full">Tratamiento<select id="fTr"></select></label>
-          <label>Promoción<select id="fPr"></select></label>
-          <label>Especialista<select id="fDr"></select></label>
+          <label id="fPrWrap">Promoción<select id="fPr"></select></label>
+          <label id="fDrWrap">Especialista<select id="fDr"></select></label>
+          <p class="note full" id="drFixed" style="margin:0"></p>
         </div>
         <p class="step" style="margin-top:28px"><span>2</span>Fecha y hora</p>
         <label style="max-width:320px">Fecha<input type="date" id="fDt"></label>
@@ -233,7 +255,7 @@
       <aside class="sum">
         <h3><i class="fa-solid fa-clipboard-check"></i> Tu cita</h3>
         <div class="l"><small>Tratamiento</small><b id="sTr">—</b></div>
-        <div class="l"><small>Especialista</small><b id="sDr">—</b></div>
+        <div class="l"><small>Te atiende</small><b id="sDr">—</b></div>
         <div class="l"><small>Fecha y hora</small><b id="sWh">Elige una fecha</b></div>
         <div class="l" style="border:0"><small>Precio</small><span class="price" id="sPr">—</span></div>
       </aside>
@@ -258,35 +280,35 @@
   <div class="wrap foot-grid">
     <div>
       <img src="assets/logo-circulo.webp" alt="" data-img="logo">
-      <h3 style="margin-top:12px"><span data-i="legal">Consultorio Dental COL‑SAN</span></h3>
+      <h3 style="margin-top:12px"><span class="nb-legal">Consultorio Dental COL‑SAN</span></h3>
       <p data-k="f_p">Cuidamos tu sonrisa con tecnología, higiene y mucho cariño.</p>
     </div>
     <div>
       <h3>Contacto</h3>
-      <p><i class="fa-solid fa-location-dot"></i> <span data-i="direccion"></span></p>
-      <p><i class="fa-solid fa-phone"></i> <span data-i="telefono"></span></p>
-      <p><i class="fa-solid fa-envelope"></i> <span data-i="correo"></span></p>
+      <p><i class="fa-solid fa-location-dot"></i> <span id="fDir"></span></p>
+      <p><i class="fa-solid fa-phone"></i> <span id="fTel"></span></p>
+      <p id="fMailP"><i class="fa-solid fa-envelope"></i> <span id="fMail"></span></p>
     </div>
     <div>
       <h3>Síguenos</h3>
       <div class="social" data-social data-round></div>
     </div>
   </div>
-  <div class="wrap small">© <span id="year"></span> <span data-i="legal">Consultorio Dental COL‑SAN</span>. Fotos: Ozkan Guner, Shedrack Salami y Katsiaryna Endruszkiewicz en Unsplash.</div>
+  <div class="wrap small">© <span id="year"></span> <span class="nb-legal">Consultorio Dental COL‑SAN</span> · <span id="fCity"></span>. Fotos: Ozkan Guner, Shedrack Salami y Katsiaryna Endruszkiewicz en Unsplash.</div>
 </footer>
 
 <!-- ============ WHATSAPP ============ -->
 <div class="wa-tip" id="waTip" data-k="wa_tip">¿Dudas? ¡Escríbenos!</div>
 <button class="wa-fab" id="waFab" aria-label="Chatear por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span class="badge">1</span></button>
 <div class="wa-panel" id="waPanel" role="dialog" aria-label="Chat de WhatsApp">
-  <div class="wa-head"><img src="assets/logo-circulo.webp" alt="" data-img="logo"><div><b data-i="nombre">COL‑SAN</b><small>Normalmente responde en minutos</small></div><button id="waClose" aria-label="Cerrar chat"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="wa-head"><img src="assets/logo-circulo.webp" alt="" data-img="logo"><div><b class="nb-name">COL‑SAN</b><small>Normalmente responde en minutos</small></div><button id="waClose" aria-label="Cerrar chat"><i class="fa-solid fa-xmark"></i></button></div>
   <div class="wa-body">
     <div class="bubble" data-k="wa_hi">¡Hola! 👋 Bienvenido a COL‑SAN. ¿En qué te podemos ayudar?</div>
     <div class="quick">
       <button data-wa="Hola, quiero saber el precio de un tratamiento.">💬 Consultar precios</button>
       <button data-wa="Hola, quiero agendar una cita.">📅 Agendar una cita</button>
       <button data-wa="Hola, quiero información sobre las promociones.">🏷️ Ver promociones</button>
-      <button data-wa="Hola, necesito atención de urgencia dental.">🚑 Tengo una urgencia</button>
+      <button data-wa="Hola, tengo una urgencia dental.">🚑 Tengo una urgencia</button>
     </div>
   </div>
   <form class="wa-form" id="waForm"><input id="waMsg" placeholder="Escribe tu consulta…" maxlength="300"><button aria-label="Enviar"><i class="fa-solid fa-paper-plane"></i></button></form>
@@ -294,7 +316,7 @@
 
 <!-- ============ EDICIÓN ============ -->
 <div class="editbar">
-  <span><i class="fa-solid fa-pen"></i> Toca un texto o imagen para cambiarlo</span>
+  <span><i class="fa-solid fa-pen"></i> Toca textos, precios o imágenes para cambiarlos</span>
   <button class="btn sm white" id="ePanel"><i class="fa-solid fa-sliders"></i>Panel</button>
   <button class="btn sm" id="eSave"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
   <button class="btn sm ghost" id="eOut">Salir</button>
@@ -317,8 +339,10 @@
 
 <div class="modal" id="adm">
   <div class="dialog wide">
-    <div class="adm-head"><h3><i class="fa-solid fa-sliders"></i> Panel de edición</h3><div class="btns"><button class="btn sm" id="aSave"><i class="fa-solid fa-floppy-disk"></i>Guardar</button><button class="btn sm ghost" data-close>Cerrar</button></div></div>
-    <div class="atabs" id="atabs"></div>
+    <div class="adm-top">
+      <div class="adm-head"><h3><i class="fa-solid fa-sliders"></i> Panel</h3><div class="btns"><button class="btn sm" id="aSave"><i class="fa-solid fa-floppy-disk"></i>Guardar</button><button class="btn sm ghost" data-close>Cerrar</button></div></div>
+      <div class="atabs" id="atabs"></div>
+    </div>
     <div class="abody" id="abody"></div>
   </div>
 </div>

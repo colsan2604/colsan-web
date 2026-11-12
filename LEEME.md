@@ -10,6 +10,8 @@ Página lista para subir a **GitHub** y publicar con **Vercel**. Las citas y el 
 | `css/estilos.css` | Colores, bordes plateados y animaciones |
 | `js/app.js` | Funcionamiento (reservas, edición, WhatsApp) |
 | `js/config.js` | **Aquí pegas tu Firebase y cambias usuario/PIN** |
+| `js/ubicacion.js` | Reconoce links de Google Maps, coordenadas y redes |
+| `api/ubicacion.js` | Servicio de Vercel que abre los links cortos de Google Maps |
 | `assets/` | Logos |
 | `firestore.rules` | Reglas de seguridad para Firebase |
 
@@ -47,9 +49,14 @@ Página lista para subir a **GitHub** y publicar con **Vercel**. Las citas y el 
 - Pulsa **Guardar** para publicar los cambios.
 - En **Citas** puedes confirmar, cancelar (libera el horario), escribir al paciente por WhatsApp y descargar la lista en Excel.
 
+## Actualizar una página que ya está publicada
+
+En GitHub → *Add file → Upload files*, sube **todo menos `js/config.js`** (ese ya tiene tus datos de Firebase). Vercel publica solo en 1 minuto.
+
 ## Notas
 
-- Los horarios se escriben como `08:30 - 12:30`; así la página calcula si está ABIERTO o CERRADO y qué horas de cita ofrecer.
-- Para que el mapa sea exacto, en *Panel → Datos → Ubicación del mapa* pega la dirección con la ciudad o las coordenadas de Google Maps.
+- Ubicación: *Panel → Ubicación*. Pega el link de Google Maps (largo o corto), el link de WhatsApp o las coordenadas, o usa *Usar mi ubicación actual* desde el consultorio.
+- Especialistas: *Panel → Especialistas* tiene un interruptor. Apagado, todas las citas son con la odontóloga principal.
+- Horarios: *Panel → Horarios*, con interruptor por día y relojes de entrada y salida.
 - Si Firebase no está configurado, la página funciona igual, pero todo se guarda solo en el navegador de quien la usa.
 - Fotos de portada: Unsplash (Ozkan Guner, Shedrack Salami, Katsiaryna Endruszkiewicz). Puedes reemplazarlas desde el panel.
