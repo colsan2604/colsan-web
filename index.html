@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>COL‑SAN · Consultorio Dental</title>
+<meta name="description" content="Consultorio Dental COL-SAN: tratamientos, promociones, horarios y reserva de citas en línea.">
+<meta name="theme-color" content="#0288d1">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header class="top" id="top">
+  <div class="bar">
+    <a class="brand" href="#inicio" data-go="inicio" aria-label="Ir al inicio">
+      <img src="assets/logo-circulo.webp" alt="Logo COL-SAN" data-img="logo" data-imgedit="logo" width="52" height="52">
+      <span class="brand-txt"><span class="brand-name" data-i="nombre">COL‑SAN</span><span class="brand-sub" data-k="sub">Consultorio dental</span></span>
+    </a>
+    <nav class="nav" id="nav"></nav>
+    <div class="top-actions">
+      <button class="icon-btn" id="btnEdit" title="Editar la página" aria-label="Editar la página"><i class="fa-solid fa-lock"></i></button>
+      <button class="icon-btn" id="burger" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet-menu" id="menu">
+  <div class="head">
+    <span class="brand"><img src="assets/logo-circulo.webp" alt="" data-img="logo" width="48" height="48"><span class="brand-txt"><span class="brand-name" data-i="nombre">COL‑SAN</span><span class="brand-sub">Consultorio dental</span></span></span>
+    <button class="icon-btn" id="menuClose" aria-label="Cerrar menú"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav id="navM"></nav>
+</div>
+
+<div class="curtain" id="curtain" aria-hidden="true"><div><img src="assets/logo-circulo.webp" alt="" data-img="logo"><p id="curtainTxt"></p></div></div>
+
+<main>
+<!-- ============ INICIO ============ -->
+<section class="mod on" id="m-inicio">
+  <div class="hero" data-bg="inicio">
+    <div class="fx" data-fx></div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" data-k="h_ey">Consultorio dental</p>
+        <h1 class="brandname" data-i="nombre">COL‑SAN</h1>
+        <p class="typed"><span id="typed"></span><i class="caret"></i></p>
+        <div class="estado" id="estado"><i class="dot"></i><span class="ic"><i class="fa-solid fa-clock"></i></span><span><b data-st>…</b><small data-sub>…</small></span></div>
+        <div class="btns">
+          <a class="btn white" href="#reservar" data-go="reservar"><i class="fa-solid fa-calendar-check"></i><span data-k="h_b1">Reservar cita</span></a>
+          <button class="btn wa" data-wa="Hola, quiero hacer una consulta."><i class="fa-brands fa-whatsapp"></i><span data-k="h_b2">Consultar por WhatsApp</span></button>
+        </div>
+      </div>
+      <div class="hero-logo" data-imgedit="logoHero">
+        <div class="glow"></div>
+        <div class="ring silver-live"><img src="assets/logo-cuadro.webp" alt="Logo Consultorio Dental COL-SAN" data-img="logoHero"></div>
+      </div>
+    </div>
+    <div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path class="w2" d="M0,50 C240,90 480,0 720,30 C960,60 1200,10 1440,40 L1440,90 L0,90Z"/><path d="M0,60 C260,20 520,90 760,60 C1000,30 1220,80 1440,55 L1440,90 L0,90Z"/></svg></div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat reveal"><i class="fa-solid fa-face-smile"></i><b data-k="s1" data-count>+4800</b><span data-k="s1l">pacientes felices</span></div>
+      <div class="stat reveal" style="--d:90ms"><i class="fa-solid fa-award"></i><b data-k="s2" data-count>14</b><span data-k="s2l">años de experiencia</span></div>
+      <div class="stat reveal" style="--d:180ms"><i class="fa-solid fa-star"></i><b data-k="s3">4.9 ★</b><span data-k="s3l">calificación</span></div>
+      <div class="stat reveal" style="--d:270ms"><i class="fa-solid fa-truck-medical"></i><b data-k="s4">24/7</b><span data-k="s4l">urgencias</span></div>
+    </div>
+  </div>
+
+  <div class="wrap band">
+    <div class="grid2">
+      <div class="card reveal">
+        <span class="kicker"><i class="fa-solid fa-circle-info"></i><span data-k="i_k">Quiénes somos</span></span>
+        <h3 data-k="i_t">Información del consultorio</h3>
+        <div class="rows" id="infoRows"></div>
+        <div class="btns" style="margin-top:18px">
+          <a class="btn sm" href="#ubicacion" data-go="ubicacion"><i class="fa-solid fa-location-dot"></i>Cómo llegar</a>
+          <a class="btn sm ghost" href="#especialistas" data-go="especialistas">Conoce al equipo</a>
+        </div>
+      </div>
+      <div class="card reveal" style="--d:120ms">
+        <span class="kicker"><i class="fa-solid fa-clock"></i><span data-k="hs_k">Te esperamos</span></span>
+        <h3 data-k="hs_t">Horario de atención</h3>
+        <div class="sched" id="schedHome"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band tight">
+    <div class="sec-h reveal">
+      <div><span class="kicker"><i class="fa-solid fa-tooth"></i><span data-k="ft_k">Lo que hacemos</span></span><h2 data-k="ft_t">Tratamientos destacados</h2></div>
+      <a class="btn ghost" href="#tratamientos" data-go="tratamientos">Ver todos<i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="grid3" id="homeTr"></div>
+  </div>
+
+  <div class="wrap band tight">
+    <div class="card reveal" style="text-align:center;padding:36px 22px">
+      <span class="kicker"><i class="fa-solid fa-heart"></i><span data-k="sg_k">Síguenos</span></span>
+      <h3 data-k="sg_t">Mira nuestro día a día en redes</h3>
+      <div class="social" data-social style="justify-content:center;margin-top:16px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRATAMIENTOS ============ -->
+<section class="mod" id="m-tratamientos">
+  <header class="banner" data-bg="tratamientos"><div class="fx" data-fx></div><div class="wrap">
+    <span class="kicker"><i class="fa-solid fa-tooth"></i><span data-k="tr_k">Catálogo</span></span>
+    <h2 data-k="tr_t">Tratamientos</h2>
+    <p data-k="tr_p">Todo lo que tu sonrisa necesita, en un solo lugar. Precios referenciales en bolivianos.</p>
+  </div></header>
+  <div class="wrap">
+    <div class="toolbar silver">
+      <div class="chips" id="cats"></div>
+      <label class="search"><span class="sr">Buscar tratamiento</span><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar tratamiento…"></label>
+    </div>
+    <div class="grid" id="trats"></div>
+  </div>
+</section>
+
+<!-- ============ PROMOCIONES ============ -->
+<section class="mod" id="m-promociones">
+  <header class="banner" data-bg="promociones"><div class="fx" data-fx></div><div class="wrap">
+    <span class="kicker"><i class="fa-solid fa-tags"></i><span data-k="pr_k">Por tiempo limitado</span></span>
+    <h2 data-k="pr_t">Promociones</h2>
+    <p data-k="pr_p">Sonreír cuesta menos este mes. Elige tu promo y resérvala en un minuto.</p>
+  </div></header>
+  <div class="wrap"><div class="grid" id="promos"></div></div>
+</section>
+
+<!-- ============ ESPECIALISTAS ============ -->
+<section class="mod" id="m-especialistas">
+  <header class="banner" data-bg="especialistas"><div class="fx" data-fx></div><div class="wrap">
+    <span class="kicker"><i class="fa-solid fa-user-doctor"></i><span data-k="dr_k">Nuestro equipo</span></span>
+    <h2 data-k="dr_t">Especialistas</h2>
+    <p data-k="dr_p">Manos expertas y trato humano en cada consulta.</p>
+  </div></header>
+  <div class="wrap"><div class="grid" id="docs"></div></div>
+</section>
+
+<!-- ============ HORARIOS ============ -->
+<section class="mod" id="m-horarios">
+  <header class="banner" data-bg="horarios"><div class="fx" data-fx></div><div class="wrap">
+    <span class="kicker"><i class="fa-solid fa-clock"></i><span data-k="ho_k">Atención</span></span>
+    <h2 data-k="ho_t">Horarios</h2>
+    <p data-k="ho_p">Encuentra el momento ideal para tu visita.</p>
+  </div></header>
+  <div class="wrap">
+    <div class="grid2">
+      <div class="card reveal">
+        <div class="estado" id="estado2" style="margin-bottom:20px"><i class="dot"></i><span class="ic"><i class="fa-solid fa-clock"></i></span><span><b data-st>…</b><small data-sub>…</small></span></div>
+        <div class="sched" id="sched"></div>
+      </div>
+      <div style="display:grid;gap:20px">
+        <div class="card reveal" style="--fill:#fff;--d:120ms">
+          <span class="kicker" style="color:var(--bad2)"><i class="fa-solid fa-truck-medical"></i><span data-k="ur_k">Emergencias</span></span>
+          <h3 data-k="ur_t">Urgencias 24/7</h3>
+          <p data-k="ur_p">Dolor fuerte, diente roto o sangrado: escríbenos y te atendemos lo antes posible, también domingos y feriados.</p>
+          <button class="btn warn" data-wa="Hola, necesito atención de urgencia dental."><i class="fa-brands fa-whatsapp"></i>Escribir a la guardia</button>
+        </div>
+        <div class="card reveal" style="--d:200ms">
+          <h3 data-k="ti_t">Mientras llegas</h3>
+          <div class="rows">
+            <div class="rowi"><span class="ic"><i class="fa-solid fa-glass-water"></i></span><span data-k="ti1">Dolor: enjuaga con agua tibia y sal. Frío por fuera, nunca calor.</span></div>
+            <div class="rowi"><span class="ic"><i class="fa-solid fa-tooth"></i></span><span data-k="ti2">Diente caído: tómalo por la corona y llévalo en leche fría.</span></div>
+            <div class="rowi"><span class="ic"><i class="fa-solid fa-box"></i></span><span data-k="ti3">Corona o bracket suelto: guárdalo y ven pronto.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UBICACIÓN ============ -->
+<section class="mod" id="m-ubicacion">
+  <header class="banner" data-bg="ubicacion"><div class="fx" data-fx></div><div class="wrap">
+    <span class="kicker"><i class="fa-solid fa-location-dot"></i><span data-k="ub_k">Visítanos</span></span>
+    <h2 data-k="ub_t">Cómo llegar</h2>
+    <p data-k="ub_p">Estamos más cerca de lo que crees.</p>
+  </div></header>
+  <div class="wrap">
+    <div class="grid2">
+      <div class="card reveal">
+        <h3 data-k="ub_h">Dirección y contacto</h3>
+        <div class="rows" id="locRows"></div>
+        <div class="btns" style="margin-top:18px">
+          <a class="btn" id="dirBtn" target="_blank" rel="noopener"><i class="fa-solid fa-route"></i>Abrir en Google Maps</a>
+          <a class="btn ghost" id="telBtn"><i class="fa-solid fa-phone"></i>Llamar</a>
+        </div>
+        <h3 style="margin-top:26px" data-k="ub_s">Redes sociales</h3>
+        <div class="social" data-social></div>
+      </div>
+      <div class="map reveal" style="--d:120ms"><iframe id="mapFrame" title="Mapa del consultorio" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVAR ============ -->
+<section class="mod" id="m-reservar">
+  <header class="banner" data-bg="reservar"><div class="fx" data-fx></div><div class="wrap">
+    <span class="kicker"><i class="fa-solid fa-calendar-check"></i><span data-k="rs_k">Rápido y sin pagos</span></span>
+    <h2 data-k="rs_t">Reserva tu cita</h2>
+    <p data-k="rs_p">Tres pasos y listo. Te confirmamos por WhatsApp.</p>
+  </div></header>
+  <div class="wrap">
+    <div class="bk" id="bkWrap">
+      <form class="card" id="bk" novalidate>
+        <p class="step"><span>1</span>Tu consulta</p>
+        <div class="form">
+          <label class="full">Tratamiento<select id="fTr"></select></label>
+          <label>Promoción<select id="fPr"></select></label>
+          <label>Especialista<select id="fDr"></select></label>
+        </div>
+        <p class="step" style="margin-top:28px"><span>2</span>Fecha y hora</p>
+        <label style="max-width:320px">Fecha<input type="date" id="fDt"></label>
+        <div id="slotBox"></div>
+        <p class="step" style="margin-top:28px"><span>3</span>Tus datos</p>
+        <div class="form">
+          <label>Nombre completo<input id="fNm" autocomplete="name" maxlength="70"></label>
+          <label>Celular / WhatsApp<input id="fPh" type="tel" inputmode="tel" autocomplete="tel" maxlength="20"></label>
+          <label class="full">Motivo de la consulta (opcional)<input id="fNt" maxlength="160"></label>
+        </div>
+        <div class="alert" id="bkErr" hidden></div>
+        <button class="btn" id="bkSend" type="submit" style="width:100%;margin-top:22px;font-size:1.12rem"><i class="fa-solid fa-paper-plane"></i><span>Confirmar cita</span></button>
+      </form>
+      <aside class="sum">
+        <h3><i class="fa-solid fa-clipboard-check"></i> Tu cita</h3>
+        <div class="l"><small>Tratamiento</small><b id="sTr">—</b></div>
+        <div class="l"><small>Especialista</small><b id="sDr">—</b></div>
+        <div class="l"><small>Fecha y hora</small><b id="sWh">Elige una fecha</b></div>
+        <div class="l" style="border:0"><small>Precio</small><span class="price" id="sPr">—</span></div>
+      </aside>
+    </div>
+    <div class="card ok-box" id="okBox" hidden>
+      <div class="check"><i class="fa-solid fa-check"></i></div>
+      <h2>¡Cita registrada!</h2>
+      <p>Guarda tu código de reserva:</p>
+      <div class="code" id="okCode"></div>
+      <p class="muted" id="okTxt"></p>
+      <div class="btns" style="justify-content:center">
+        <a class="btn wa" id="okWa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i>Enviar confirmación</a>
+        <button class="btn ghost" id="okNew">Agendar otra</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <img src="assets/logo-circulo.webp" alt="" data-img="logo">
+      <h3 style="margin-top:12px"><span data-i="legal">Consultorio Dental COL‑SAN</span></h3>
+      <p data-k="f_p">Cuidamos tu sonrisa con tecnología, higiene y mucho cariño.</p>
+    </div>
+    <div>
+      <h3>Contacto</h3>
+      <p><i class="fa-solid fa-location-dot"></i> <span data-i="direccion"></span></p>
+      <p><i class="fa-solid fa-phone"></i> <span data-i="telefono"></span></p>
+      <p><i class="fa-solid fa-envelope"></i> <span data-i="correo"></span></p>
+    </div>
+    <div>
+      <h3>Síguenos</h3>
+      <div class="social" data-social data-round></div>
+    </div>
+  </div>
+  <div class="wrap small">© <span id="year"></span> <span data-i="legal">Consultorio Dental COL‑SAN</span>. Fotos: Ozkan Guner, Shedrack Salami y Katsiaryna Endruszkiewicz en Unsplash.</div>
+</footer>
+
+<!-- ============ WHATSAPP ============ -->
+<div class="wa-tip" id="waTip" data-k="wa_tip">¿Dudas? ¡Escríbenos!</div>
+<button class="wa-fab" id="waFab" aria-label="Chatear por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span class="badge">1</span></button>
+<div class="wa-panel" id="waPanel" role="dialog" aria-label="Chat de WhatsApp">
+  <div class="wa-head"><img src="assets/logo-circulo.webp" alt="" data-img="logo"><div><b data-i="nombre">COL‑SAN</b><small>Normalmente responde en minutos</small></div><button id="waClose" aria-label="Cerrar chat"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="wa-body">
+    <div class="bubble" data-k="wa_hi">¡Hola! 👋 Bienvenido a COL‑SAN. ¿En qué te podemos ayudar?</div>
+    <div class="quick">
+      <button data-wa="Hola, quiero saber el precio de un tratamiento.">💬 Consultar precios</button>
+      <button data-wa="Hola, quiero agendar una cita.">📅 Agendar una cita</button>
+      <button data-wa="Hola, quiero información sobre las promociones.">🏷️ Ver promociones</button>
+      <button data-wa="Hola, necesito atención de urgencia dental.">🚑 Tengo una urgencia</button>
+    </div>
+  </div>
+  <form class="wa-form" id="waForm"><input id="waMsg" placeholder="Escribe tu consulta…" maxlength="300"><button aria-label="Enviar"><i class="fa-solid fa-paper-plane"></i></button></form>
+</div>
+
+<!-- ============ EDICIÓN ============ -->
+<div class="editbar">
+  <span><i class="fa-solid fa-pen"></i> Toca un texto o imagen para cambiarlo</span>
+  <button class="btn sm white" id="ePanel"><i class="fa-solid fa-sliders"></i>Panel</button>
+  <button class="btn sm" id="eSave"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+  <button class="btn sm ghost" id="eOut">Salir</button>
+</div>
+<input type="file" accept="image/*" id="quickImg" hidden>
+
+<div class="modal" id="login">
+  <form class="dialog" id="loginForm" style="text-align:center">
+    <img class="login-logo" src="assets/logo-circulo.webp" alt="" data-img="logo">
+    <h3>Editar la página</h3>
+    <p class="muted">Ingresa tu usuario y PIN.</p>
+    <div class="form" style="grid-template-columns:1fr;text-align:left;margin-top:10px">
+      <label>Usuario<input id="lUser" autocomplete="username" required></label>
+      <label>PIN<input id="lPin" type="password" inputmode="numeric" autocomplete="current-password" required></label>
+    </div>
+    <div class="alert" id="lErr" hidden></div>
+    <div class="btns" style="justify-content:center;margin-top:18px"><button class="btn" id="lGo" type="submit">Entrar</button><button class="btn ghost" type="button" data-close>Cancelar</button></div>
+  </form>
+</div>
+
+<div class="modal" id="adm">
+  <div class="dialog wide">
+    <div class="adm-head"><h3><i class="fa-solid fa-sliders"></i> Panel de edición</h3><div class="btns"><button class="btn sm" id="aSave"><i class="fa-solid fa-floppy-disk"></i>Guardar</button><button class="btn sm ghost" data-close>Cerrar</button></div></div>
+    <div class="atabs" id="atabs"></div>
+    <div class="abody" id="abody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

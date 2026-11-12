@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Solo la administradora (el usuario creado en Authentication) puede editar y ver citas.
+    // Si cambias el correo en js/config.js, cámbialo también aquí.
+    function esAdmin() {
+      return request.auth != null && request.auth.token.email == 'moni@colsan.app';
+    }
+
+    // Contenido de la página: todos lo leen, solo la administradora lo cambia
+    match /sitio/{id} {
+      allow read: if true;
+      allow write: if esAdmin();
+    }
+    match /imagenes/{id} {
+      allow read: if true;
+      allow write: if esAdmin();
+    }
+
+    // Horarios ocupados (sin datos personales). Un horario solo se puede tomar una vez.
+    match /ocupados/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['date', 'time', 'dr']);
+      allow delete: if esAdmin();
+    }
+
+    // Citas: cualquiera puede crear una; solo la administradora las ve, cambia o borra
+    match /citas/{id} {
+      allow create: if request.resource.data.n is string
+                    && request.resource.data.n.size() > 2 && request.resource.data.n.size() <= 70
+                    && request.resource.data.ph is string && request.resource.data.ph.size() <= 20
+                    && request.resource.data.st == 'pendiente';
+      allow read, update, delete: if esAdmin();
+    }
+  }
+}
