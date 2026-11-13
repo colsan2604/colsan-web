@@ -22,6 +22,8 @@ const fmt = m => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
 const todayStr = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
 const telWa = p => { const n = String(p || '').replace(/\D/g, ''); return n.length === 8 ? '591' + n : n; };
 const money = v => +v === 0 ? '¡Gratis!' : 'Bs. ' + (+v).toLocaleString('es-BO');
+// it.op = true -> el precio está oculto para el público
+const priceOf = it => it?.op ? 'A consultar' : money(it?.p);
 const longDate = d => new Date(d + 'T00:00').toLocaleDateString('es-BO', { weekday: 'long', day: 'numeric', month: 'long' });
 
 /* ---------- Datos por defecto (todo es editable) ---------- */
@@ -204,6 +206,10 @@ function renderStatus() {
 const ed = (L, id, f, v, ph, num) => editing
   ? `<span data-e="${L}:${id}:${f}"${num ? ' data-num' : ''} data-ph="${esc(ph)}">${esc(v)}</span>`
   : esc(v);
+const eyeBtn = (L, it) => editing
+  ? `<button class="peye ${it.op ? 'off' : ''}" data-peye="${L}:${it.id}" title="El público ${it.op ? 'NO ve' : 've'} este precio"><i class="fa-solid ${it.op ? 'fa-eye-slash' : 'fa-eye'}"></i>${it.op ? 'Precio oculto · tocar para mostrar' : 'Precio visible · tocar para ocultar'}</button>`
+  : '';
+const askBtn = name => `<button class="ask" data-wa="Hola, quiero saber el precio de: ${esc(name)}."><i class="fa-brands fa-whatsapp"></i>Consultar precio</button>`;
 const tools = (L, id) => editing
   ? `<div class="tools"><button data-pup="${L}:${id}" title="Mover antes" aria-label="Mover antes"><i class="fa-solid fa-arrow-left"></i></button><button data-pdel="${L}:${id}" title="Quitar" aria-label="Quitar"><i class="fa-solid fa-trash"></i></button></div>`
   : '';
@@ -276,7 +282,7 @@ function renderHome() {
   $('#infoRows').innerHTML = infoRows(['legal', 'director', 'licencia', 'direccion', 'ciudad', 'telefono', 'correo']);
   $('#schedHome').innerHTML = schedHtml();
   $('#homeTr').innerHTML = S.tr.slice(0, 6).map((t, i) =>
-    `<a class="mini reveal tilt" href="#reservar" data-go="reservar" data-tr="${t.id}" style="--d:${i * 70}ms"><span class="ic"><i class="fa-solid ${IC[t.c] || 'fa-tooth'}"></i></span><span>${esc(t.n)}<small>${esc(t.c)} · desde ${money(t.p)}</small></span></a>`).join('');
+    `<a class="mini reveal tilt" href="#reservar" data-go="reservar" data-tr="${t.id}" style="--d:${i * 70}ms"><span class="ic"><i class="fa-solid ${IC[t.c] || 'fa-tooth'}"></i></span><span>${esc(t.n)}<small>${esc(t.c)}${t.op ? '' : ' · desde ' + money(t.p)}</small></span></a>`).join('');
   $('#btnTeam').hidden = !S.info.verEsp;
   $('#btnHours').hidden = !!S.info.verEsp;
 }
@@ -292,7 +298,8 @@ function renderTr() {
       <h3>${ed('tr', t.id, 'n', t.n, 'Nombre del tratamiento')}</h3>
       <div class="meta"><span class="chip-s">${ed('tr', t.id, 'c', t.c, 'Categoría')}</span><span class="chip-s"><i class="fa-regular fa-clock"></i>${ed('tr', t.id, 'd', t.d, 'Duración')}</span></div>
       ${editing || t.x ? `<p class="muted" style="margin:0">${ed('tr', t.id, 'x', t.x, 'Descripción corta')}</p>` : ''}
-      <div class="price">${editing ? `Bs. ${ed('tr', t.id, 'p', t.p, '0', 1)}` : money(t.p)}</div>
+      ${editing ? `<div class="price ${t.op ? 'price-off' : ''}">Bs. ${ed('tr', t.id, 'p', t.p, '0', 1)}</div>${eyeBtn('tr', t)}`
+        : t.op ? askBtn(t.n) : `<div class="price">${money(t.p)}</div>`}
       <a class="btn sm" href="#reservar" data-go="reservar" data-tr="${t.id}"><i class="fa-solid fa-calendar-plus"></i>Agendar</a>
     </article>`).join('') || '<p class="card">No encontramos ese tratamiento. Escríbenos por WhatsApp y te ayudamos.</p>';
 }
@@ -302,9 +309,9 @@ function renderPr() {
       <span class="ribbon">PROMO</span>
       <span class="tag">${ed('pr', p.id, 'b', p.b, 'Etiqueta')}</span>
       <h3>${ed('pr', p.id, 't', p.t, 'Título de la promoción')}</h3>
-      <div class="price">${editing
-        ? `<small class="lbl">Antes</small><s>Bs. ${ed('pr', p.id, 'o', p.o, '0', 1)}</s><small class="lbl">Ahora</small>Bs. ${ed('pr', p.id, 'p', p.p, '0', 1)}`
-        : (+p.o ? `<s>Bs. ${esc(p.o)}</s>` : '') + money(p.p)}</div>
+      ${editing
+        ? `<div class="price ${p.op ? 'price-off' : ''}"><small class="lbl">Antes</small><s>Bs. ${ed('pr', p.id, 'o', p.o, '0', 1)}</s><small class="lbl">Ahora</small>Bs. ${ed('pr', p.id, 'p', p.p, '0', 1)}</div>${eyeBtn('pr', p)}`
+        : p.op ? '' : `<div class="price">${+p.o ? `<s>Bs. ${esc(p.o)}</s>` : ''}${money(p.p)}</div>`}
       <span class="chip-s" style="align-self:flex-start"><i class="fa-regular fa-calendar"></i>Hasta ${ed('pr', p.id, 'v', p.v, 'fecha')}</span>
       <a class="btn sm" href="#reservar" data-go="reservar" data-pr="${p.id}"><i class="fa-solid fa-bolt"></i>Quiero esta promo</a>
     </article>`).join('') || '<p class="card">Pronto tendremos nuevas promociones.</p>';
@@ -350,7 +357,7 @@ function renderLd() {
 /* ---------- Reservas ---------- */
 function renderBookingSelects() {
   const keep = { tr: $('#fTr').value, pr: $('#fPr').value, dr: $('#fDr').value };
-  $('#fTr').innerHTML = S.tr.map(t => `<option value="${t.id}">${esc(t.n)} — ${money(t.p)}</option>`).join('');
+  $('#fTr').innerHTML = S.tr.map(t => `<option value="${t.id}">${esc(t.n)}${t.op ? '' : ' — ' + money(t.p)}</option>`).join('');
   $('#fPr').innerHTML = '<option value="">Sin promoción</option>' + S.pr.map(p => `<option value="${p.id}">${esc(p.b)} · ${esc(p.t)}</option>`).join('');
   $('#fDr').innerHTML = S.dr.map(d => `<option value="${d.id}">${esc(d.n)}</option>`).join('');
   if (S.tr.some(t => t.id === keep.tr)) $('#fTr').value = keep.tr;
@@ -406,7 +413,7 @@ function renderSum() {
   $('#sDr').textContent = curDr().n;
   const date = $('#fDt').value;
   $('#sWh').textContent = date ? longDate(date) + (sel ? ` · ${sel}` : '') : 'Elige una fecha';
-  $('#sPr').textContent = p ? money(p.p) : t ? money(t.p) : '—';
+  $('#sPr').textContent = p ? priceOf(p) : t ? priceOf(t) : '—';
 }
 function bkError(html) { const e = $('#bkErr'); e.innerHTML = html; e.hidden = false; e.style.animation = 'none'; e.offsetHeight; e.style.animation = ''; }
 function setSending(on) {
@@ -429,7 +436,7 @@ async function submitCita(e) {
     code: 'CS-' + Math.random().toString(36).slice(2, 6).toUpperCase(),
     n, ph, nt, date, time: sel,
     tr: t.n, trId: t.id, dr: d.n, drId: d.id, pr: p ? `${p.b} · ${p.t}` : '',
-    price: p ? money(p.p) : money(t.p), st: 'pendiente'
+    price: p ? priceOf(p) : priceOf(t), st: 'pendiente'
   };
   c.slot = `${date}_${sel.replace(':', '')}_${d.id}`;
   setSending(true);
@@ -718,8 +725,8 @@ async function setImage(key, file) {
 
 /* ---------- Agregar, quitar y mover tarjetas desde la página ---------- */
 const LISTS = {
-  tr: { title: 'n', f: { n: 'Nombre', c: 'Categoría', p: 'Precio (Bs.)', d: 'Duración', x: 'Descripción corta' }, num: ['p'], add: () => row(['n', 'c', 'p', 'd', 'x'], ['Nuevo tratamiento', 'Preventiva', 0, '30 min', '']) },
-  pr: { title: 't', f: { b: 'Etiqueta', t: 'Título', o: 'Precio antes (Bs.)', p: 'Precio promo (Bs., 0 = gratis)', v: 'Vigente hasta' }, num: ['o', 'p'], add: () => row(['b', 't', 'o', 'p', 'v'], ['NUEVO', 'Nueva promoción', 0, 0, '']) },
+  tr: { title: 'n', f: { n: 'Nombre', c: 'Categoría', p: 'Precio (Bs.)', d: 'Duración', x: 'Descripción corta' }, num: ['p'], add: () => ({ ...row(['n', 'c', 'p', 'd', 'x'], ['Nuevo tratamiento', 'Preventiva', 0, '30 min', '']), op: false }) },
+  pr: { title: 't', f: { b: 'Etiqueta', t: 'Título', o: 'Precio antes (Bs.)', p: 'Precio promo (Bs., 0 = gratis)', v: 'Vigente hasta' }, num: ['o', 'p'], add: () => ({ ...row(['b', 't', 'o', 'p', 'v'], ['NUEVO', 'Nueva promoción', 0, 0, '']), op: false }) },
   dr: { title: 'n', f: { n: 'Nombre', s: 'Especialidad', h: 'Días de atención' }, num: [], add: () => row(['n', 's', 'h'], ['Dr(a). Nombre', 'Especialidad', 'Lunes a viernes']) }
 };
 function selectAll(el) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
@@ -737,6 +744,19 @@ function pageTool(d) {
   if (d.pdel) { if (!confirm(`¿Quitar "${a[i][LISTS[L].title]}"?`)) return; a.splice(i, 1); }
   else if (i > 0) [a[i - 1], a[i]] = [a[i], a[i - 1]];
   markDirty(); applyAll();
+}
+
+function togglePrice(L, id, show) {
+  const it = S[L]?.find(x => x.id === id); if (!it) return;
+  it.op = show === undefined ? !it.op : !show;
+  markDirty(); applyAll();
+  if ($('#adm').classList.contains('on')) renderAdm();
+  toast(it.op ? 'Precio oculto: el público verá "Consultar precio". Pulsa Guardar.' : 'Precio visible. Pulsa Guardar.');
+}
+function setAllPrices(L, show) {
+  S[L].forEach(x => x.op = !show);
+  markDirty(); applyAll(); renderAdm();
+  toast(show ? 'Todos los precios visibles. Pulsa Guardar.' : 'Todos los precios ocultos. Pulsa Guardar.');
 }
 
 /* ---------- Citas (panel) ---------- */
@@ -851,11 +871,13 @@ const INFO_F = [
 ];
 const sw = (attr, on, label) => `<label class="sw"><input type="checkbox" ${attr} ${on ? 'checked' : ''}><span class="knob"></span><span>${label}</span></label>`;
 const tval = s => { const r = ranges(s)[0]; return r ? [fmt(r[0]), fmt(r[1])] : ['', '']; };
+const allBtns = L => `<div class="btns" style="margin-bottom:14px"><button class="btn sm ghost" data-allop="${L}:1"><i class="fa-solid fa-eye"></i>Mostrar todos los precios</button><button class="btn sm ghost" data-allop="${L}:0"><i class="fa-solid fa-eye-slash"></i>Ocultar todos los precios</button></div>`;
 function listHtml(L) {
   const F = LISTS[L];
   return S[L].map((r, i) => `<div class="aitem">
       ${L === 'dr' ? `<div style="display:flex;align-items:center;gap:10px"><div class="th" style="width:64px;height:64px;border-radius:50%;background:#dfeef7 center/cover url('${IMG['dr_' + r.id] || ''}')"></div><label class="btn sm ghost">Foto<input type="file" accept="image/*" data-imgkey="dr_${r.id}" hidden></label></div>` : ''}
       ${Object.entries(F.f).map(([f, l]) => `<label class="${f === 'x' || f === 't' ? 'wide' : ''}">${l}<input data-l="${L}" data-r="${i}" data-f="${f}" value="${esc(r[f])}" ${F.num.includes(f) ? 'type="number" min="0" step="1" inputmode="numeric"' : ''}></label>`).join('')}
+      ${L !== 'dr' ? `<div class="full-row">${sw(`data-lop="${L}:${r.id}"`, !r.op, r.op ? 'Precio oculto al público' : 'Mostrar precio al público')}</div>` : ''}
       <div class="acts">${i ? `<button class="btn sm ghost" data-up="${i}" title="Subir"><i class="fa-solid fa-arrow-up"></i></button>` : ''}<button class="btn sm ghost" data-del="${i}"><i class="fa-solid fa-trash"></i>Quitar</button></div>
     </div>`).join('') + `<button class="btn" data-add><i class="fa-solid fa-plus"></i>Agregar</button>`;
 }
@@ -908,9 +930,9 @@ function renderAdm() {
       + `<div class="btns" style="margin-top:14px"><button class="btn ghost" data-hcopy><i class="fa-solid fa-copy"></i>Copiar el horario del lunes a martes–viernes</button></div>
       <label style="max-width:320px;margin-top:18px">Duración de cada cita (minutos)<input type="number" min="15" max="180" step="5" data-info="intervalo" value="${esc(S.info.intervalo)}"></label>`;
   } else if (admTab === 'tr') {
-    b.innerHTML = '<p class="hint">Cambia nombres y <b>precios</b> aquí o tocándolos en la página. La <b>categoría</b> crea los filtros del catálogo.</p>' + listHtml('tr');
+    b.innerHTML = '<p class="hint">Cambia nombres y <b>precios</b> aquí o tocándolos en la página. La <b>categoría</b> crea los filtros del catálogo. Si ocultas un precio, el público ve el botón <b>Consultar precio</b> (abre WhatsApp).</p>' + allBtns('tr') + listHtml('tr');
   } else if (admTab === 'pr') {
-    b.innerHTML = '<p class="hint">Precio promo en 0 = aparece como <b>¡Gratis!</b></p>' + listHtml('pr');
+    b.innerHTML = '<p class="hint">Precio promo en 0 = aparece como <b>¡Gratis!</b> Si ocultas el precio, solo se ve la etiqueta (por ejemplo <b>2x1</b> o <b>100% de descuento</b>) y el título.</p>' + allBtns('pr') + listHtml('pr');
   } else if (admTab === 'dr') {
     b.innerHTML = `<div class="switchbox">${sw('data-esp', S.info.verEsp, '<b>Mostrar el módulo Especialistas</b>')}
         <p class="hint" style="margin:6px 0 0">${S.info.verEsp
@@ -958,6 +980,7 @@ $('#adm').addEventListener('click', e => {
   else if (d.imgreset) { delete IMG[d.imgreset]; dirtyImg.add(d.imgreset); markDirty(); renderAdm(); applyAll(); }
   else if (d.cdel) delCita(d.cdel);
   else if (d.csv !== undefined) csv();
+  else if (d.allop) { const [L, v] = d.allop.split(':'); setAllPrices(L, v === '1'); }
   else if (d.locgo !== undefined) runRecognize(t);
   else if (d.locgps !== undefined) useGps(t);
   else if (d.locaddr !== undefined) setLoc({ q: fullAddr() }, 'Se usará la dirección escrita.');
@@ -992,6 +1015,7 @@ $('#adm').addEventListener('change', e => {
     S.sc[+i][f] = x0 && x1 ? `${x0} - ${x1}` : '';
     markDirty(); applySoon();
   }
+  else if (d.lop) { const [L, id] = d.lop.split(':'); togglePrice(L, id, t.checked); }
   else if (d.esp !== undefined) { S.info.verEsp = t.checked; markDirty(); applyAll(); renderAdm(); }
 });
 
@@ -1024,6 +1048,8 @@ async function doLogin(e) {
 document.addEventListener('click', e => {
   const t = e.target;
   if (editing && !t.closest('.modal,.editbar')) {
+    const eye = t.closest('[data-peye]');
+    if (eye) { e.preventDefault(); togglePrice(...eye.dataset.peye.split(':')); return; }
     const tool = t.closest('[data-pdel],[data-pup],[data-padd]');
     if (tool) { e.preventDefault(); pageTool(tool.dataset); return; }
     const op = t.closest('[data-open]');
