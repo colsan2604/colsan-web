@@ -451,3 +451,13 @@ body.edit .wa-tip{display:none}
   .editbar .btn.sm{flex:1;padding:10px 8px}
   body.edit .toast{top:78px}
 }
+
+/* ===================== v4: mostrar / ocultar precios ===================== */
+.ask{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:2px solid #b9e6c9;background:#effcf3;color:#0f6b3a;font-weight:700;font-size:1rem;transition:transform .2s,background .2s}
+.ask:hover{transform:translateY(-2px);background:#dff7e8}
+.ask i{font-size:1.15em}
+.price-off{opacity:.4;text-decoration:line-through;text-decoration-thickness:2px}
+.price-off [data-e]{text-decoration:line-through}
+.peye{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:12px;border:2px dashed var(--cel);background:var(--cel3);color:var(--cel2);font-weight:700;font-size:.85rem;line-height:1.2;text-align:left}
+.peye.off{border-color:#e2a03f;background:#fff6e6;color:#8a5200}
+.aitem .full-row{grid-column:1/-1}
