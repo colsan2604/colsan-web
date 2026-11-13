@@ -57,6 +57,7 @@ En GitHub → *Add file → Upload files*, sube **todo menos `js/config.js`** (e
 
 - Ubicación: *Panel → Ubicación*. Pega el link de Google Maps (largo o corto), el link de WhatsApp o las coordenadas, o usa *Usar mi ubicación actual* desde el consultorio.
 - Especialistas: *Panel → Especialistas* tiene un interruptor. Apagado, todas las citas son con la odontóloga principal.
+- Precios: cada tratamiento y promoción tiene **Mostrar / ocultar precio** (en la tarjeta en modo edición o en el Panel). Oculto, el público ve **Consultar precio** (abre WhatsApp) o, en promociones, solo la etiqueta (2x1, 100% gratis…).
 - Horarios: *Panel → Horarios*, con interruptor por día y relojes de entrada y salida.
 - Si Firebase no está configurado, la página funciona igual, pero todo se guarda solo en el navegador de quien la usa.
 - Fotos de portada: Unsplash (Ozkan Guner, Shedrack Salami, Katsiaryna Endruszkiewicz). Puedes reemplazarlas desde el panel.
